@@ -8,13 +8,13 @@ jobs:
   without_optional_params:
     name: One with little info
     runs-on: ubuntu-latest
-    		steps:
-      			- uses: actions/checkout@master
-      			- name: Microsoft Teams Notification
-        		uses: skitionek/notify-microsoft-teams@master
-        		if: always()
-        		with:
-          			webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
+    steps:
+      - uses: actions/checkout@master
+      - name: Microsoft Teams Notification
+      uses: skitionek/notify-microsoft-teams@master
+      if: always()
+      with:
+        webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
 
   if_failure:
     name: Only if failure
