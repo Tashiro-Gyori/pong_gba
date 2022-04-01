@@ -1,2 +1,28 @@
-- name: notify-microsoft-teams
-  uses: Skitionek/notify-microsoft-teams@v1.0.4
+name: Check notification
+
+on:
+	push: {}
+	release: {}
+
+jobs:
+	without_optional_params:
+		name: One with little info
+		runs-on: ubuntu-18.04
+    		steps:
+      			- uses: actions/checkout@master
+      			- name: Microsoft Teams Notification
+        		uses: skitionek/notify-microsoft-teams@master
+        		if: always()
+        		with:
+          			webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
+
+	if_failure:
+		name: Only if failure
+		runs-on: ubuntu-18.04
+		steps:
+			- uses: actions/checkout@master
+			- name: Microsoft Teams Notification
+			uses: skitionek/notify-microsoft-teams@master
+			if: failure()
+			with:
+				webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
