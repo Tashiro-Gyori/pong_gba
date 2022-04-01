@@ -57,6 +57,7 @@ build : $(TARGET).gba
 $(TARGET).gba : $(TARGET).elf
 	$(OBJCOPY) -v -O binary $< $@
 	-@gbafix $@ -t$(TITLE)
+	@rm -fv *.o
 
 $(TARGET).elf : $(OBJS)
 	$(LD) $^ $(LDFLAGS) -o $@
