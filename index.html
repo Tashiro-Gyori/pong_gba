@@ -264,7 +264,7 @@ function enableDebug() {
 		}
 	}
 	if (!debug || !debug.postMessage) {
-		debug = window.open('debugger.html', 'debug');
+		debug = window.open('site/debugger.html', 'debug');
 	} else {
 		debug.postMessage('connect', document.domain || '*');
 	}
