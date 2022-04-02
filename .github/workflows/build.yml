@@ -27,7 +27,7 @@ jobs:
         git push
 
     - name: Create Pull Request
-    
+
       uses: actions/github-script@v6
       with:
         script: |
