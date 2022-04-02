@@ -13,19 +13,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Build with Docker using devkitARM
-      run: make
-
-    - name: Push gba file and create pull request
-      
+    - name: Build with Docker using devkitARM and push gba file (if new)
       run: |
+        make
         git config --global user.name 'Tashiro'
         git config --global user.email 'Tashiro-Gyori@users.noreply.github.com'
         mv pong.elf bin
         mv pong.gba bin
         git add bin/*
-        git commit -am "Generated from pipeline ${{github.job}} with id ${{github.run_id}}"
-        git push
+        git status
+        if ( [ $? -ne 0 ] ); then git commit -am "Generated from pipeline ${{github.job}} with id ${{github.run_id}}" && git push; fi
 
     - name: Create Pull Request
 
