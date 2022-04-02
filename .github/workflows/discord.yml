@@ -1,13 +1,17 @@
 name: Discord Webhook
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   git:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: discord-webhook
       uses: johnnyhuy/actions-discord-git-webhook@v1.0.0
