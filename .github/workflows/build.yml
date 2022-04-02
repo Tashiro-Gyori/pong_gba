@@ -21,8 +21,9 @@ jobs:
       run: |
         git config --global user.name 'Tashiro'
         git config --global user.email 'Tashiro-Gyori@users.noreply.github.com'
-        git add pong.elf
-        git add pong.gba
+        mv pong.elf bin
+        mv pong.gba bin
+        git add bin/*
         git commit -am "Generated from pipeline ${{github.job}} with id ${{github.run_id}}"
         git push
 
