@@ -17,3 +17,11 @@ jobs:
     
     - name: Build with Docker using devkitARM
       run: make
+
+    - uses: actions/checkout@v3
+      - name: Push gba file
+        run: |
+          git config --global user.name 'Tashiro'
+          git config --global user.email 'Tashiro-Gyori@users.noreply.github.com'
+          git commit -am "Generated from pipeline"
+          git push
