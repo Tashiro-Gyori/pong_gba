@@ -49,6 +49,8 @@ jobs:
               labels: ['feature', 'automated pr']
             });
           } catch (error) {
+            console.log(typeof(error));
+            console.log(error);
             return 0; // to ignore the error where the API returns 422 (because the PR already exists)
           }
           

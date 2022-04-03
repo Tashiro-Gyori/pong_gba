@@ -69,6 +69,13 @@ window.onload = function() {
 			var pixelatedBox = document.getElementById('pixelated');
 			pixelatedBox.parentElement.removeChild(pixelatedBox);
 		}
+		var client = new XMLHttpRequest();
+		client.open('GET', 'bin/pong.gba');
+		client.responseType = 'blob';
+		client.onload = function() {
+			run(client.response);
+		}
+		client.send();
 	} else {
 		var dead = document.getElementById('controls');
 		dead.parentElement.removeChild(dead);
