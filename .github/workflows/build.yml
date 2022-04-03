@@ -49,6 +49,9 @@ jobs:
               labels: ['feature', 'automated pr']
             });
           } catch (error) {
-            return 0; // to ignore the error where the API returns 422 (because the PR already exists)
+            if (error.message.startsWith('A pull request already exists for')) {
+              return 0; // to ignore the error where the API returns 422 (because the PR already exists)
+            }
+            return 1; 
           }
           
