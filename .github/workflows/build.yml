@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
     - name: Dowload artifact
-      uses: action/download-artifact@v3
+      uses: actions/download-artifact@v3
       with:
         name: builded_pong
     - name: Create Release
