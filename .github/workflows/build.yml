@@ -26,6 +26,7 @@ jobs:
             bin/*
   publish:
     runs-on: ubuntu-latest
+    needs: build
     steps: 
     - name: Dowload artifact
       uses: actions/download-artifact@v3
