@@ -18,8 +18,6 @@ jobs:
         make
         git config --global user.name 'Tashiro'
         git config --global user.email 'Tashiro-Gyori@users.noreply.github.com'
-        mv pong.elf bin
-        mv pong.gba bin
         git add bin/*
         git status
         if ( [ $? -ne 0 ] ); then git commit -am "Generated from pipeline ${{github.job}} with id ${{github.run_id}}" && git push; fi
