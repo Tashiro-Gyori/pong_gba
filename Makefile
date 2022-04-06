@@ -256,6 +256,7 @@ clean:
 	@echo clean ...
 	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).gba
 
+$(OUTPUT).gba	:	$(OUTPUT).elf
 
 else		# If we're here, we should be in the BUILD dir
 
