@@ -70,7 +70,7 @@ window.onload = function() {
 			pixelatedBox.parentElement.removeChild(pixelatedBox);
 		}
 		var client = new XMLHttpRequest();
-		client.open('GET', 'bin/pong.gba');
+		client.open('GET', 'bin/pong_gba.gba');
 		client.responseType = 'blob';
 		client.onload = function() {
 			run(client.response);
