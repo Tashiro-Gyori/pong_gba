@@ -2,8 +2,8 @@
 // pong.c
 //
 
-#include "../include/toolbox.h"
-#include "../include/input.h"
+#include "toolbox.h"
+#include "input.h"
 
 
 #define P2_X 206

@@ -16,7 +16,7 @@ docker build -t <project-name-here> .
 
 docker run <project-name-here>
 
-docker cp <container-name-here>:/usr/src/app/pong.elf bin
+docker cp <container-name-here>:/usr/src/app/bin/pong.elf bin
 
-docker cp <container-name-here>:/usr/src/app/pong.gba bin
+docker cp <container-name-here>:/usr/src/app/bin/pong.gba bin
 ```
