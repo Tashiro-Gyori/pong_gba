@@ -52,4 +52,27 @@ jobs:
             }
             return 1; 
           }
-          
+
+  test:
+
+    runs-on: ubuntu-latest
+    container: 
+      image: selenium/standalone-firefox
+      options: --user root
+
+    steps:
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+    - name: Launch functional tests
+      run: |
+        sudo apt update
+        sudo apt install -y git
+        npm install selenium-webdriver
+        git clone https://github.com/Tashiro-Gyori/pong_gba.git
+        cd pong_gba
+        git checkout dev
+        ls > debug.txt
+        cat debug.txt
+        node test.js
