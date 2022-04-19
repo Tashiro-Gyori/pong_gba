@@ -1,9 +1,9 @@
 const {Builder, By} = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
 
-let options = new firefox.Options()
-options.addPreference("browser.download.folderList", 1); // download to folder Downloads
-options.addPreference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream");
+let options = new firefox.Options();
+options.setPreference("browser.download.folderList", 1); // download to folder Downloads
+options.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream");
 
 // Instanciation of Firefox web driver (geckodriver)
 const driver = new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
