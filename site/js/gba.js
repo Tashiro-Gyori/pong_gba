@@ -307,8 +307,12 @@ GameBoyAdvance.prototype.downloadSavedata = function() {
 		return null;
 	}
 	if (window.URL) {
-		var url = window.URL.createObjectURL(new Blob([sram.buffer], { type: 'application/octet-stream' }));
-		window.open(url);
+		var element = document.createElement('a');
+		element.setAttribute('href', window.URL.createObjectURL(new Blob([sram.buffer], { type: 'application/octet-stream' })));
+		element.setAttribute('download', 'screenshot.png');
+		document.body.appendChild(element);
+		element.click();
+		document.body.removeChild(element);
 	} else {
 		var data = this.encodeBase64(sram.view);
 		window.open('data:application/octet-stream;base64,' + data, this.rom.code + '.sav');

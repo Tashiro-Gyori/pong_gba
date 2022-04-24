@@ -58,6 +58,8 @@ $(TARGET).gba : $(TARGET).elf
 	$(OBJCOPY) -v -O binary $< $@
 	-@gbafix $@ -t$(TITLE)
 	@rm -fv *.o
+	mv $(TARGET).elf bin/$(TARGET).elf
+	mv $(TARGET).gba bin/$(TARGET).gba
 
 $(TARGET).elf : $(OBJS)
 	$(LD) $^ $(LDFLAGS) -o $@
