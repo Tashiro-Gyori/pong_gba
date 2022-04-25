@@ -20,8 +20,9 @@ jobs:
 
       - name: Build with Docker using devkitARM and push gba file (if new)
         run: |
-	  cd ${{ github.workspace }}
-          make
+          cd ${{ github.workspace }} 
+	  make
+
       - name: Create and archive production artifact
         uses: actions/upload-artifact@v3
         with:
