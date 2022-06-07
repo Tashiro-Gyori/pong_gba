@@ -22,7 +22,7 @@ jobs:
 
       - name: Build with Docker using devkitARM and push gba file (if new)
         run: |
-          cd ${{ github.workspace }} 
+          ls
           make
 
       - name: Create and archive production artifact
