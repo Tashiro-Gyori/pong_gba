@@ -4,8 +4,7 @@ on:
   pull_request:
     types:
       - closed
-  workflow_run:
-    
+      
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
