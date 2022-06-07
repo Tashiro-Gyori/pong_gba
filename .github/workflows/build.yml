@@ -4,6 +4,7 @@ on:
   pull_request:
     types:
       - closed
+      
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
@@ -20,7 +21,7 @@ jobs:
 
       - name: Build with Docker using devkitARM and push gba file (if new)
         run: |
-          cd ${{ github.workspace }} 
+          ls
           make
 
       - name: Create and archive production artifact
