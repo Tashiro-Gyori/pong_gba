@@ -25,6 +25,7 @@
 var gba;
 var runCommands = [];
 var debug = null;
+//test
 
 try {
 	gba = new GameBoyAdvance();
@@ -234,7 +235,7 @@ function setPixelated(pixelated) {
 				screen.setAttribute('height', '320');
 			}
 			if (window.navigator.appName == 'Opera') {
-			// Ugly hack! Ew!
+			// Ugly hack! Ew! Test
 			if (pixelated) {
 				screen.style.marginTop = '0';
 				screen.style.marginBottom = '-325px';
