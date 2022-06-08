@@ -37,7 +37,7 @@ jobs:
       - name: Get tag
         id: get-tag
         run: |
-          echo (git tag --contain df25e90)
+          git tag --contain df25e90
           echo "RELEASE_VERSION=$(git tag --contain df25e90)" >> $GITHUB_ENV
       - name: Create Release with tag
         id: create_release
