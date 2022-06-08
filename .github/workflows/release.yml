@@ -8,6 +8,7 @@ on:
       - v.**
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
     container: devkitpro/devkitarm
