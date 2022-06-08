@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  pull_request:
+    types:
+      - closed
+    tags:        
+      - v.**
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo The PR was merged, starting deployed
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkitarm
+    needs: if_merged
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build with Docker using devkitARM and push gba file (if new)
+        run: |
+          make
+      - name: Create and archive production artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: builded_pong
+          path: |
+            bin/pong.gba
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: builded_pong
+          path: ./
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            I have a new Release
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./pong.gba
+          asset_name: pong.gba
+          asset_content_type: application/octet-stream
