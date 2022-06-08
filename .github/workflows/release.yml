@@ -1,9 +1,11 @@
 name: Release
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:    
+      - 'master'
+    tags:
+      - v.**
 
 jobs:
   if_merged:
