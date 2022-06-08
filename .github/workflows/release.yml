@@ -37,6 +37,7 @@ jobs:
       - name: Get tag
         id: get-tag
         run: |
+          sudo apt install git
           echo "RELEASE_VERSION=$(git tag --contain df25e90)"
           echo "RELEASE_VERSION=$(git tag --contain df25e90)" >> $GITHUB_ENV
       - name: Create Release with tag
