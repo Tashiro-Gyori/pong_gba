@@ -34,13 +34,10 @@ jobs:
           name: builded_pong
           path: ./
       - uses: actions/checkout@v3
-      - name: Get tag annotation
-        id: tag-data
-        uses: ericcornelissen/git-tag-annotation-action@v2
       - name: Get tag
         id: get-tag
         run: |
-          echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          echo "git tag --contain df25e90" >> $GITHUB_ENV
       - name: Create Release with tag
         id: create_release
         uses: actions/create-release@v1
@@ -50,7 +47,7 @@ jobs:
           tag_name: ${{ env.RELEASE_VERSION }}
           release_name: Release ${{ env.RELEASE_VERSION }}
           body: |
-            ${{ steps.tag-data.outputs.git-tag-annotation }}
+            a good release
           draft: false
           prerelease: false
       - name: Upload Release Asset
