@@ -6,6 +6,7 @@ on:
       - master
     tags:
       - v.**
+
 jobs:
   
   build:
@@ -36,14 +37,18 @@ jobs:
       - name: Get tag annotation
         id: tag-data
         uses: ericcornelissen/git-tag-annotation-action@v2
+      - name: Get tag
+        id: get-tag
+        run: |
+          echo '::set-output name=RELEASE_VERSION::${GITHUB_REF#refs/*/}'
       - name: Create Release with tag
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          tag_name: ${GITHUB_REF#refs/*/}
-          release_name: Release ${GITHUB_REF#refs/*/}
+          tag_name: ${{ steps.get-tag.outputs.RELEASE_VERSION }}
+          release_name: Release ${{ steps.get-tag.outputs.RELEASE_VERSION }}
           body: |
             ${{ steps.tag-data.outputs.git-tag-annotation }}
           draft: false
