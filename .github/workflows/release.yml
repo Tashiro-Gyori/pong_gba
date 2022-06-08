@@ -8,16 +8,10 @@ on:
       - v.**
 
 jobs:
-  if_merged:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo The PR was merged, starting deployed
+  
   build:
     runs-on: ubuntu-latest
     container: devkitpro/devkitarm
-    needs: if_merged
     steps:
       - uses: actions/checkout@v3
 
