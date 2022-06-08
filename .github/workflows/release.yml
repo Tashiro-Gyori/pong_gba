@@ -3,21 +3,15 @@ name: Release
 on:
   push:
     branches:    
-      - 'master'
+      - master
     tags:
       - v.**
 
 jobs:
-  if_merged:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo The PR was merged, starting deployed
+
   build:
     runs-on: ubuntu-latest
     container: devkitpro/devkitarm
-    needs: if_merged
     steps:
       - uses: actions/checkout@v3
 
@@ -39,9 +33,10 @@ jobs:
         with:
           name: builded_pong
           path: ./
-      - uses: actions/checkout@v3
       - name: Get tag
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        id: get-tag
+        run: |
+          echo "RELEASE_VERSION=$(date +%s)" >> $GITHUB_ENV
       - name: Create Release with tag
         id: create_release
         uses: actions/create-release@v1
@@ -51,7 +46,7 @@ jobs:
           tag_name: ${{ env.RELEASE_VERSION }}
           release_name: Release ${{ env.RELEASE_VERSION }}
           body: |
-            ${{ env.RELEASE_VERSION }}
+            a good release
           draft: false
           prerelease: false
       - name: Upload Release Asset
