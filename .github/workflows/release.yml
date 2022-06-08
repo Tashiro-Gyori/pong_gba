@@ -2,15 +2,21 @@ name: Release
 
 on:
   push:
-    branches:    
-      - 'master'
     tags:
       - v.**
 
 jobs:
+
+  if_master:
+    if: github.event.base_ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch
+        run: echo "New version on master is OK for release"
   
   build:
     runs-on: ubuntu-latest
+    needs: if_master
     container: devkitpro/devkitarm
     steps:
       - uses: actions/checkout@v3
@@ -35,14 +41,15 @@ jobs:
           path: ./
       - uses: actions/checkout@v3
       - name: Get tag
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        id: get-tag
+        run: echo '::set-output name=RELEASE_VERSION::${GITHUB_REF#refs/*/}'
       - name: Create Release with tag
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          tag_name: ${{ env.RELEASE_VERSION }}
+          tag_name: ${{ steps.get-tag.outputs.RELEASE_VERSION }}
           release_name: Release ${{ env.RELEASE_VERSION }}
           body: |
             ${{ env.RELEASE_VERSION }}
