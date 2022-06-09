@@ -6,12 +6,13 @@ jobs:
   git:
     runs-on: ubuntu-latest
     steps:
-
+    - name: debug
+      run: |
+        echo "$ {{ secrets.WEBHOOK_URL }}"
     - uses: actions/checkout@v2
-    
+
     - name: discord-webhook
       uses: johnnyhuy/actions-discord-git-webhook@v1.0.0
-      env:
-        URL: ${{ secrets.WEBHOOK_URL }}
       with:
-        webhook_url: $"URL"
+        webhook_url: $ {{ secrets.WEBHOOK_URL }}
+
