@@ -8,8 +8,8 @@ jobs:
     steps:
 
     - uses: actions/checkout@v2
-
+    
     - name: discord-webhook
       uses: johnnyhuy/actions-discord-git-webhook@v1.0.0
       with:
-        webhook_url: https://discord.com/api/webhooks/959448382072565820/VF3VBEywTesFRKXjIw9J5p7peHJn3xSpN6SlNxgU0rUTUolgk1-vbxKp-1lcRizUXsOc 
+        webhook_url: $ {{ secrets.WEBHOOK_URL }}
