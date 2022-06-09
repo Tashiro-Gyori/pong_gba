@@ -11,5 +11,7 @@ jobs:
     
     - name: discord-webhook
       uses: johnnyhuy/actions-discord-git-webhook@v1.0.0
+      env:
+        URL: ${{ secrets.WEBHOOK_URL }}
       with:
-        webhook_url: $ {{ secrets.WEBHOOK_URL }}
+        webhook_url: $"URL"
